@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request,redirect, flash
+
 import requests
 
 app = Flask(__name__)
@@ -20,12 +21,14 @@ b = " ".join(s)
 print(b)
 
 
+
 hiddenword = []
 wordlength = len(str(randomword.json()[0])) 
 for x in range(wordlength):
     hiddenword.append("_")
 hiddenwordstring = " ".join(hiddenword)
 error=None
+
 
 
 
@@ -69,6 +72,7 @@ def letterappear(letter,count):
     randomword1 = randomword.json()[0]
     randomword1 = list(randomword1)
     randomword1 = " ".join(randomword1)
+
     randomword1 = list(randomword1)
     for x in range(count):
         placecount = randomword1.index(letter)
@@ -103,6 +107,7 @@ def guesswrong(letter):
     global image
     global lettersleft
     global error
+
     #remove from lettersleft
     letterupper = letter.upper()
     x = lettersleft.index(str(letterupper))
@@ -113,6 +118,7 @@ def guesswrong(letter):
         image = image -1
     if image == 0:
         error = "GAME OVER"
+
 
 @app.route("/",methods=["GET", "POST"])
 def index():
@@ -127,6 +133,7 @@ def index():
 
     #create a array where people can guess the word
 
+
     if request.method == 'POST':
         guess = request.form['guess']
         print(guess)
@@ -139,6 +146,7 @@ def index():
             else:
                 guesswrong(guess)
                 return render_template("index.html", randomword=randomword, lettersleft=lettersleft, hiddenwordstring=hiddenwordstring,image=str(image),lettersguessed=lettersguessed, error=error)
+
         else:
             return render_template("index.html", randomword=randomword, lettersleft=lettersleft, hiddenwordstring=hiddenwordstring,image=str(image),lettersguessed=lettersguessed)
 
@@ -149,5 +157,7 @@ def index():
 
 
 
+
 if __name__ == "__main__" :
+
     app.run(debug=True)
