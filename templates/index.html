@@ -26,6 +26,14 @@
               </h1>
               <br>
               <br>
+              {% if error %}  
+              <div class="offcanvas offcanvas-bottom show" id="offcanvasWithBackdrop" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                <h1 style ="text-align: center; color:red;">Game Over<h1>
+                <div class="offcanvas-body" style="text-align: center;">
+                  <a href ="/reload" type="button" class="btn btn-primary" style="align-items: center;">Restart</button>
+                </div>
+              </div>  
+               {% endif %}  
             </div>
             <div class="col-sm">
               <h1>Word is</h1><h1 style="color:blue;"> {{ hiddenwordstring }}</h1>
